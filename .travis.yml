@@ -1,0 +1,27 @@
+language: node_js
+cache: yarn
+sudo: required
+notifications:
+  email: false
+node_js:
+  - '8'
+before_install:
+  - curl http://security.ubuntu.com/ubuntu/pool/universe/libu/libuv1/libuv1-dev_1.8.0-1_amd64.deb > libuv1-dev.deb
+  - curl http://security.ubuntu.com/ubuntu/pool/universe/libu/libuv1/libuv1_1.8.0-1_amd64.deb > libuv1.deb
+  - sudo apt-get install ./libuv1.deb
+  - sudo apt-get install ./libuv1-dev.deb
+script:
+  - yarn jest --coverage
+  - yarn compile
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  - npm run semantic-release
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
+addons:
+  apt:
+    packages:
+      - build-essential
+      - cmake
+      - libmicrohttpd-dev
