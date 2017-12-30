@@ -61,7 +61,7 @@
   "description": "monero-miner",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Yellowiki/monero-miner.git"
+    "url": "https://github.com/Ispent/monero-miner.git"
   },
   "os": ["linux"]
 }
